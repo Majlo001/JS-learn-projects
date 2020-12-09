@@ -10,29 +10,51 @@
 
 <body>
     <section id="todo-container">
-        <div id="todo-list">
-            <div class="todo-head">
-                <h3>My lists</h3>
+        <header>
+            <h1>Good morning #YourName, what are we going to do today?</h1>
+        </header>
+
+        <div class="main">
+            <div class="todo-list">
+                <h2>My lists</h2>
                 <ul>
                     <li>School</li>
                     <li>Work</li>
                     <li>Games</li>
                 </ul>
             </div>
+
+            <div class="todo">
+                <div class="todo-head">
+                    <h1>School</h1>
+                    <p>4 tasks ramining</p>
+                </div>
+                <div class="todo-tasks">
+                    <div class="tasks">
+                        <div class="task">
+                            <input type="checkbox" id="checkbox" />
+                            <label for="checkbox"></label>
+                            <p>Math exam</p>
+                            <hr>
+                        </div>
+                        <div class="task">
+                            <input type="checkbox" id="checkbox" />
+                            <label for="checkbox"></label>
+                            <p>Math exam</p>
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="new-tasks">
+                        <input type="text">
+                        <button><i class="fa fa-plus"></i></button>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div class="todo today">
-
-        </div>
-
-        <div class="todo upcoming">
-
-        </div>
-
-        <div class="todo someday">
-
-
-        </div>
+        <footer>
+            Made with <i class="fa fa-heart"></i> by M&Delta;JLO
+        </footer>
     </section>
 </body>
 
