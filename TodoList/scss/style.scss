@@ -2,7 +2,8 @@
 * {
     margin: 0;
     font-family: "Work sans", sans-serif;
-    color: white
+    color: white;
+    transition: 150ms ease-out;
 }
 
 body {
@@ -71,7 +72,7 @@ header {
     }
     .todo-tasks {
         .tasks {
-            padding: 10px 10px 30px 10px;
+            padding: 5px 10px 10px 10px;
             p {
                 font-size: 22px;
                 width: 430px;
@@ -81,16 +82,56 @@ header {
             hr {
                 float: left;
                 width: 450px;
-                margin: 10px 0 0 12px;
+                margin: 10px 20px 0 12px;
                 color: rgba(112, 112, 112, 0.2);
             }
         }
     }
 }
 
+.new-list {
+    margin-top: 10px;
+}
+
+.active {
+    font-weight: bold;
+}
+
+.addNew {
+    background: transparent;
+    color: inherit;
+    border: 0;
+    border-bottom: 1px solid white;
+    outline: none;
+    font-size: inherit;
+    transition: 150ms ease-in;
+}
+
+.addNew:focus {
+    border-bottom: 2px solid white;
+}
+
+.addNew:focus::placeholder {
+    opacity: 0.2;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    font-size: inherit;
+    background: 0;
+    transition: opacity 150ms ease-out;
+}
+
+button:hover {
+    opacity: 0.7;
+}
+
 // Round checkbox
 .task {
-    label {
+    padding-top: 5px;
+    height: 40px;
+    .custom-checkbox {
         border: 1px solid #ccc;
         border-radius: 50%;
         cursor: pointer;
@@ -98,7 +139,7 @@ header {
         width: 24px;
         position: absolute;
     }
-    label:after {
+    .custom-checkbox:after {
         border: 2px solid #fff;
         border-top: none;
         border-right: none;
@@ -114,11 +155,14 @@ header {
     input[type="checkbox"] {
         visibility: hidden;
     }
-    input[type="checkbox"]:checked+label {
+    input[type="checkbox"]:checked+label .custom-checkbox {
+        transition: 150ms ease-out;
+        animation: pulse 1s;
         background-color: #66bb6a;
         border-color: #66bb6a;
     }
-    input[type="checkbox"]:checked+label:after {
+    input[type="checkbox"]:checked+label .custom-checkbox:after {
+        transition: 250ms ease-out;
         opacity: 1;
     }
 }
@@ -129,5 +173,33 @@ footer {
     text-align: center;
     i {
         color: #ff0000;
+    }
+}
+
+//Animations
+@-webkit-keyframes pulse {
+    0% {
+        -webkit-box-shadow: 0 0 0 0 rgba(102, 187, 106, 0.4);
+    }
+    70% {
+        -webkit-box-shadow: 0 0 0 20px rgba(102, 187, 106, 0);
+    }
+    100% {
+        -webkit-box-shadow: 0 0 0 0 rgba(102, 187, 106, 0);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        -moz-box-shadow: 0 0 0 0 rgba(102, 187, 106, 0.4);
+        box-shadow: 0 0 0 0 rgba(102, 187, 106, 0.4);
+    }
+    70% {
+        -moz-box-shadow: 0 0 0 10px rgba(102, 187, 106, 0);
+        box-shadow: 0 0 0 10px rgba(102, 187, 106, 0);
+    }
+    100% {
+        -moz-box-shadow: 0 0 0 0 rgba(102, 187, 106, 0);
+        box-shadow: 0 0 0 0 rgba(102, 187, 106, 0);
     }
 }

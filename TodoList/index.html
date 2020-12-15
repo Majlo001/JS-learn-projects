@@ -18,10 +18,14 @@
             <div class="todo-list">
                 <h2>My lists</h2>
                 <ul>
-                    <li>School</li>
+                    <li class="active">School</li>
                     <li>Work</li>
                     <li>Games</li>
                 </ul>
+                <div class="new-list">
+                    <button><i class="fa fa-plus"></i></button>
+                    <input type="text" class="addNew" placeholder="new list name">
+                </div>
             </div>
 
             <div class="todo">
@@ -32,21 +36,41 @@
                 <div class="todo-tasks">
                     <div class="tasks">
                         <div class="task">
-                            <input type="checkbox" id="checkbox" />
-                            <label for="checkbox"></label>
-                            <p>Math exam</p>
+                            <input type="checkbox" id="task1" />
+                            <label for="task1">
+                                <span class="custom-checkbox"></span>
+                                <p>Math exam</p>
+                            </label>
                             <hr>
                         </div>
                         <div class="task">
-                            <input type="checkbox" id="checkbox" />
-                            <label for="checkbox"></label>
-                            <p>Math exam</p>
+                            <input type="checkbox" id="task2" />
+                            <label for="task2">
+                                <span class="custom-checkbox"></span>
+                                <p>Math exam</p>
+                            </label>
+                            <hr>
+                        </div>
+                        <div class="task">
+                            <input type="checkbox" id="task3" />
+                            <label for="task3">
+                                <span class="custom-checkbox"></span>
+                                <p>Math exam</p>
+                            </label>
+                            <hr>
+                        </div>
+                        <div class="task">
+                            <input type="checkbox" id="task4" />
+                            <label for="task4">
+                                <span class="custom-checkbox"></span>
+                                <p>Math exam</p>
+                            </label>
                             <hr>
                         </div>
                     </div>
                     <div class="new-tasks">
-                        <input type="text">
                         <button><i class="fa fa-plus"></i></button>
+                        <input type="text" class="addNew" placeholder="new task name">
                     </div>
                 </div>
             </div>
