@@ -37,11 +37,8 @@ header h1 {
   margin: 10px 0;
 }
 
-#todo-list {
-  float: left;
-  line-height: 100%;
-  width: 200px;
-  height: 200px;
+.todo-name {
+  cursor: pointer;
 }
 
 .todo {

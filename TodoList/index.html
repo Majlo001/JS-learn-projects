@@ -4,8 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Todo List</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="js/script.js" defer></script>
 </head>
 
 <body>
@@ -17,15 +18,15 @@
         <div class="main">
             <div class="todo-list">
                 <h2>My lists</h2>
-                <ul>
-                    <li class="active">School</li>
-                    <li>Work</li>
-                    <li>Games</li>
+                <ul id="todo-list-data">
+                    <li class="todo-name active">School</li>
+                    <li class="todo-name">Work</li>
+                    <li class="todo-name">Games</li>
                 </ul>
-                <div class="new-list">
+                <form action="" class="new-list" id="addNewList">
                     <button><i class="fa fa-plus"></i></button>
-                    <input type="text" class="addNew" placeholder="new list name">
-                </div>
+                    <input type="text" id="addNewListInput" class="addNew" placeholder="new list name">
+                </form>
             </div>
 
             <div class="todo">
