@@ -19,9 +19,7 @@
             <div class="todo-list">
                 <h2>My lists</h2>
                 <ul id="listContainer">
-                    <!-- <li class="todo-name active">School</li>
-                    <li class="todo-name">Work</li>
-                    <li class="todo-name">Games</li> -->
+                    <!--- list here -->
                 </ul>
                 <form action="" class="new-list" id="addNewList">
                     <button><i class="fa fa-plus"></i></button>
@@ -29,45 +27,18 @@
                 </form>
             </div>
 
-            <div class="todo">
+            <div class="todo" id="todoContainer">
                 <div class="todo-head">
-                    <h1>School</h1>
-                    <p>4 tasks ramining</p>
+                    <h1 id="listTitle">
+                        <!--- list name here -->
+                    </h1>
+                    <p id="taskRemaining">
+                        <!--- count of remaining tasks here -->
+                    </p>
                 </div>
                 <div class="todo-tasks">
-                    <div class="tasks">
-                        <div class="task">
-                            <input type="checkbox" id="task1" />
-                            <label for="task1">
-                                <span class="custom-checkbox"></span>
-                                <p>Math exam</p>
-                            </label>
-                            <hr>
-                        </div>
-                        <div class="task">
-                            <input type="checkbox" id="task2" />
-                            <label for="task2">
-                                <span class="custom-checkbox"></span>
-                                <p>Math exam</p>
-                            </label>
-                            <hr>
-                        </div>
-                        <div class="task">
-                            <input type="checkbox" id="task3" />
-                            <label for="task3">
-                                <span class="custom-checkbox"></span>
-                                <p>Math exam</p>
-                            </label>
-                            <hr>
-                        </div>
-                        <div class="task">
-                            <input type="checkbox" id="task4" />
-                            <label for="task4">
-                                <span class="custom-checkbox"></span>
-                                <p>Math exam</p>
-                            </label>
-                            <hr>
-                        </div>
+                    <div class="tasks" id="taskContainer">
+                        <!--- Tasks here -->
                     </div>
                     <div class="new-tasks">
                         <button><i class="fa fa-plus"></i></button>
@@ -79,6 +50,17 @@
                 </div>
             </div>
         </div>
+
+        <template id="taskTemplate">
+            <div class="task">
+                <input type="checkbox" />
+                <label>
+                    <span class="custom-checkbox"></span>
+                    <p></p>
+                </label>
+                <hr>
+            </div>
+        </template>
 
         <footer>
             Made with <i class="fa fa-heart"></i> by M&Delta;JLO

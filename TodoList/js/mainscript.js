@@ -3,13 +3,20 @@ const addNewList = document.getElementById('addNewList');
 const addNewListInput = document.getElementById('addNewListInput');
 const deleteListBtn = document.getElementById('deleteListBtn');
 
+const todoContainer = document.getElementById('todoContainer');
+const listTitle = document.getElementById('listTitle');
+const taskRemaining = document.getElementById('taskRemaining');
+const taskContainer = document.getElementById('taskContainer');
+
+const taskTemplate = document.getElementById('taskTemplate');
+
 
 const LOCAL_STORAGE_LIST_KEY = 'task.lists'
 const LOCAL_STORAGE_SELECTED_LIST_ID_KEY = 'task.selectedListId'
 let lists = JSON.parse(localStorage.getItem(LOCAL_STORAGE_LIST_KEY)) || [
-    { id: 1, name: 'School', tasks: [] },
-    { id: 2, name: 'Work', tasks: [] },
-    { id: 3, name: 'Graphics', tasks: [] }
+    { id: 1, name: 'School', tasks: [{ id: 1, name: "Math exam", done: true }, { id: 2, name: "English homework", done: false }] },
+    { id: 2, name: 'Work', tasks: [{ id: 1, name: "Todo website", done: false }] },
+    { id: 3, name: 'Graphics', tasks: [{ id: 1, name: "Learn Adobe XD", done: false }] }
 ];
 let selectedListId = localStorage.getItem(LOCAL_STORAGE_SELECTED_LIST_ID_KEY)
 
@@ -17,6 +24,25 @@ let selectedListId = localStorage.getItem(LOCAL_STORAGE_SELECTED_LIST_ID_KEY)
 render();
 
 function render() {
+    renderLists();
+    const selectedList = lists.find(list => list.id == selectedListId);
+    if (selectedListId == null) {
+        listTitle.innerText = "Nothing to show here"
+    } else {
+        listTitle.innerText = selectedList.name;
+        let count = countTasks(selectedList);
+        console.log(count);
+        if (count > 1) {
+            taskRemaining.innerText = count + " tasks remaining";
+        } else {
+            taskRemaining.innerText = count + " task remaining";
+        }
+        clearElements(taskContainer);
+        renderTasks(taskContainer);
+    }
+}
+
+function renderLists() {
     clearElements(listContainer);
     lists.forEach(list => {
         let liElement = document.createElement('li');
@@ -30,7 +56,14 @@ function render() {
     });
 }
 
+function renderTasks(taskContainer) {
 
+}
+
+// Function that count tasks
+function countTasks(selectedList) {
+    return selectedList.tasks.filter(task => !task.done).length;
+}
 
 // Function that create new list
 addNewList.addEventListener('submit', i => {
