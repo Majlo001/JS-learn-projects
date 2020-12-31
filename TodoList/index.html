@@ -38,11 +38,13 @@
                 </div>
                 <div class="todo-tasks">
                     <div class="tasks" id="taskContainer">
-                        <!--- Tasks here -->
+                        <!--- tasks here -->
                     </div>
                     <div class="new-tasks">
-                        <button><i class="fa fa-plus"></i></button>
-                        <input type="text" class="addNew" placeholder="new task name">
+                        <form action="" id="addNewTask">
+                            <button><i class="fa fa-plus"></i></button>
+                            <input id="newTaskInput" type="text" class="addNew" placeholder="new task name">
+                        </form>
                     </div>
                     <div class="delete-list">
                         <button id="deleteListBtn"><i class="fa fa-trash"></i></button>
@@ -56,7 +58,7 @@
                 <input type="checkbox" />
                 <label>
                     <span class="custom-checkbox"></span>
-                    <p></p>
+                    <p><!-- task text here ---></p>
                 </label>
                 <hr>
             </div>

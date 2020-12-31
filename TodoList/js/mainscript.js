@@ -9,6 +9,8 @@ const taskRemaining = document.getElementById('taskRemaining');
 const taskContainer = document.getElementById('taskContainer');
 
 const taskTemplate = document.getElementById('taskTemplate');
+const addNewTask = document.getElementById('addNewTask');
+const addNewTaskInput = document.getElementById('newTaskInput');
 
 
 const LOCAL_STORAGE_LIST_KEY = 'task.lists'
@@ -27,18 +29,18 @@ function render() {
     renderLists();
     const selectedList = lists.find(list => list.id == selectedListId);
     if (selectedListId == null) {
-        listTitle.innerText = "Nothing to show here"
+        todoContainer.style.display = 'none';
     } else {
+        todoContainer.style.display = '';
         listTitle.innerText = selectedList.name;
         let count = countTasks(selectedList);
-        console.log(count);
-        if (count > 1) {
-            taskRemaining.innerText = count + " tasks remaining";
-        } else {
+        if (count == 1) {
             taskRemaining.innerText = count + " task remaining";
+        } else {
+            taskRemaining.innerText = count + " tasks remaining";
         }
         clearElements(taskContainer);
-        renderTasks(taskContainer);
+        renderTasks(selectedList);
     }
 }
 
@@ -56,8 +58,38 @@ function renderLists() {
     });
 }
 
-function renderTasks(taskContainer) {
+function renderTasks(selectedList) {
+    selectedList.tasks.forEach((task) => {
+        let taskElement = document.importNode(taskTemplate.content, true);
+        let checkbox = taskElement.querySelector('input');
+        console.log(checkbox);
+        checkbox.id = task.id;
+        checkbox.checked = task.done;
+        let labelp = taskElement.querySelector('p');
+        labelp.htmlFor = task.id;
+        labelp.append(task.name);
+        taskContainer.appendChild(taskElement);
+    })
+}
 
+// Function that create new tasks
+addNewTask.addEventListener('submit', i => {
+    i.preventDefault();
+    const taskName = addNewTaskInput.value;
+    if (taskName != '' && taskName != null) {
+        const task = createNewTask(taskName);
+        addNewTaskInput.value = '';
+        let selectedList = lists.find(list => list.id === selectedListId);
+        selectedList.tasks.push(task);
+        save();
+        render();
+    } else {
+        return;
+    }
+});
+
+function createNewTask(newTaskName) {
+    return { id: Date.now().toString(), name: newTaskName, done: false };
 }
 
 // Function that count tasks
