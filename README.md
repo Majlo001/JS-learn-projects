@@ -1,2 +1,2 @@
 # JSLearnProjects
-Learning Javascript and his libraries.
+Learning Javascript and its libraries.
