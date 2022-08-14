@@ -1,2 +1,7 @@
 AlertGenerator/.vscode/settings.json
 TodoList/.vscode/settings.json
+
+**/node_modules
+**/build
+**/coverage
+**/.DS_Store

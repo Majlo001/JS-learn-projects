@@ -1,2 +1,9 @@
 # JS Learn Projects
-Learning Javascript and its libraries.
+Projects for learning Javascript and its libraries.
+
+## Used technologies:
+- React.js
+    - React Router
+- Node.js
+- Express.js
+- Next.js
