@@ -3,15 +3,12 @@ import {useState} from 'react';
 const useWordle = (solution) => {
     const [turn, setTurn] = useState(0) 
     const [currentGuess, setCurrentGuess] = useState('')
-    const [guesses, setGuesses] = useState([])
+    const [guesses, setGuesses] = useState([...Array(6)])
     const [history, setHistory] = useState([])
     const [isCorrect, setIsCorrect] = useState(false)
 
     const formatGuess = () => {
-        console.log(currentGuess);
-
         let solutionArray = [ ...solution];
-        console.log(solutionArray);
 
         let formattedGuess = [...currentGuess].map((l) => {
             return {key: l, color: 'grey'}
@@ -31,9 +28,24 @@ const useWordle = (solution) => {
         return formattedGuess;
     }
 
-    // const addNewGuess = () => {
-        
-    // }
+    const addNewGuess = (formattedGuess) => {
+        if (currentGuess === solution){
+            setIsCorrect(true);
+        }
+
+        setGuesses(prev => {
+            let newGuesses = [...prev];
+            newGuesses[turn] = formattedGuess;
+            return newGuesses;
+        });
+        setHistory(prev => {
+            return [...prev, currentGuess];
+        });
+        setTurn(prev => {
+            return prev + 1;
+        });
+        setCurrentGuess('');
+    }
 
     const handleKeyup = ({key}) => {
         
@@ -53,27 +65,24 @@ const useWordle = (solution) => {
                 return;
             }
             const formatted = formatGuess();
-            console.log(formatted);
+            addNewGuess(formatted);
         }
         if (key === 'Backspace') {
             setCurrentGuess((prev) => {
-                return prev.slice(0, -1);
+                prev.slice(0, -1);
+                return;
             })
 
             return 
         }
         if (/^[A-Za-z]$/.test(key)) {
             if (currentGuess.length < 5) {
-                setCurrentGuess((prev) => {
-                    return prev + key;
-                })
+                setCurrentGuess(prev => prev + key )
             }
         }
     }
 
     return { turn, currentGuess, guesses, isCorrect, handleKeyup}
-
-
 }
 
 export default useWordle;
