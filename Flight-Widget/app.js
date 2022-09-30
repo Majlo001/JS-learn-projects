@@ -103,7 +103,7 @@ function generateTime() {
     if (hour < 10) {
         displayHour = "0" + hour
     }
-    return displayHour +  ":" + generateRandomNumber(5) + generateRandomNumber()
+    return displayHour + ":" + generateRandomNumber(5) + generateRandomNumber()
 }
 
 function shuffleUp() {
