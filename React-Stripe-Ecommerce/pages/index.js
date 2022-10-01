@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react'
-import Footer from '../components/footer';
+import Layout from '../components/layout';
 import Product from '../components/product';
 import { initMongoose } from '../lib/mongoose';
 import { findAllProducts } from './api/products';
@@ -23,7 +23,7 @@ export default function Home({products}) {
   }
 
   return (
-    <div className="py-5">
+    <Layout>
       <input value={phrase} onChange={e => setPhrase(e.target.value)} type="text" placeholder="Search for products..." className="bg-gray-100 w-full py-2 px-4 rounded-xl mx-4" />
 
       <div>
@@ -47,10 +47,7 @@ export default function Home({products}) {
 
         ))}
       </div>
-
-      <Footer />
-
-    </div>
+    </Layout>
   )
 }
 
