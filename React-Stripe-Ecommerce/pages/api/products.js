@@ -11,7 +11,13 @@ export default async function handle(req, res) {
     const {ids} = req.query;
 
     if(ids) {
-        res.json(await Product.find().exec({'_id':{$in:ids.split(',')}}));
+        const idsArray =ids.split(',')
+
+        res.json(
+            await Product.find({
+                '_id':{ $in:idsArray }
+            }).exec()
+        );
     } else {
         res.json(await findAllProducts());
     }
