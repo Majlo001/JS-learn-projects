@@ -3,7 +3,7 @@ import Layout from '../components/layout';
 import { ProductsContext } from '../components/productContext';
 
 export default function checkoutPage() {
-    const {selectedProducts} = useContext(ProductsContext)
+    const {selectedProducts,setSelectedProducts} = useContext(ProductsContext);
     const [productsInfo, setProductsInfo] = useState([])
 
     useEffect(() => {
@@ -36,7 +36,7 @@ export default function checkoutPage() {
             {productsInfo.length && productsInfo.map(product => (
                 <div className="flex mb-5 items-center" key={product._id}>
                     <div className="bg-gray-100 p-3 rounded-xl shrink-0" style={{boxShadow:'inset 1px 0px 10px 10px rgba(0,0,0,0.1)'}}>
-                        <img className="w-24" src={product.picture} alt=""/>
+                        <img className="w-24" src={product.image} alt=""/>
                     </div>
                     <div className="pl-4 items-center">
                         <h3 className="font-bold text-lg">{product.name}</h3>
