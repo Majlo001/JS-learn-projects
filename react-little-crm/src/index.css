@@ -30,3 +30,42 @@ nav {
   display: flex;
   flex-direction: column;
 }
+
+.nav__logo-container img {
+  width: 20px;
+}
+.nav__icon{
+  color: white;
+}
+
+/* ===== DASHBOARD ===== */
+.dashboard {
+  padding: 36px;
+  width: 100%;
+}
+.dashboard__ticket-container{
+  height: 80vh;
+  overflow: scroll;
+}
+
+/* ===== TICKET CARD ===== */
+.ticket-card{
+  display: flex;
+  width: 100%;
+}
+.ticket-card #link {
+  display: flex;
+  width: 100%;
+}
+.ticket-card #link > * {
+  background-color: gray;
+  margin: 4px;
+  padding: 28px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.ticket-card__color{
+  width: 16px !important;
+  margin: 4px;
+}
