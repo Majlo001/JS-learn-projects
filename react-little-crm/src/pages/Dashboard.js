@@ -7,7 +7,7 @@ const Dashboard = () => {
             category: 'Q1 2023',
             color: 'red',
             title: 'NFT will break the world.',
-            avatar: '',
+            avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZl_8G0K5ilgQOa3o7b2Ear7UdM1LwlgkDvw&usqp=CAU',
             status: 'done',
             priority: 5,
             progress: 40,
@@ -19,7 +19,7 @@ const Dashboard = () => {
             color: 'blue',
             title: 'NFT Blue',
             avatar: '',
-            status: 'done',
+            status: 'to be done',
             priority: 2,
             progress: 55,
             description: 'Description here.',
@@ -29,8 +29,8 @@ const Dashboard = () => {
             category: 'Q1 2023',
             color: 'green',
             title: 'NFT Green',
-            avatar: '',
-            status: 'done',
+            avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQiof_lqI87o1dB6wFsyoJirSiS3ZAwv61GA&usqp=CAU',
+            status: 'stuck',
             priority: 1,
             progress: 15,
             description: 'Description here.',
@@ -40,6 +40,15 @@ const Dashboard = () => {
 
     const uniqueCategories = [
         ...new Set(tickets?.map(({category}) => category))
+    ]
+
+    const colorCategories = [
+        '#93c47d',
+        '#f6b26b',
+        '#8e7cc3',
+        '#F1E398',
+        '#e06666',
+        '#6fa8dc'
     ]
 
     return (
@@ -54,7 +63,7 @@ const Dashboard = () => {
                             .map((filteredTicket, ticketindex) => (
                                 <TicketCard
                                     id={ticketindex}
-                                    color={filteredTicket.color}
+                                    color={colorCategories[categoryIndex] || colorCategories[0]}
                                     ticket={filteredTicket}
                                 />
                             ))
