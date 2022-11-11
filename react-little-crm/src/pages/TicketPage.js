@@ -1,7 +1,11 @@
-import {useState} from 'react'
+import axios from 'axios';
+import {useState} from 'react';
+import {useNavigate} from 'react-router-dom';
+
 
 const TicketPage = () => {
     const editMode = false;
+    const navigate = useNavigate()
     const [formData, setFormData] = useState({
         status: 'to be done',
         color: 'green',
@@ -12,8 +16,21 @@ const TicketPage = () => {
 
     const uniqueCategories = ['test1','test2','test3']
 
-    const handleSubmit = () => {
-        alert('Submit');
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        console.log(formData)
+
+        if (!editMode) {
+            const response = await axios.post('http://127.0.0.1:8800/tickets', {
+                formData
+            })
+
+            console.log(response.status)
+            const success = response.status === 200
+            if (success) {
+                navigate('/')
+            }
+        }
     }
     const handleChange = (e) => {
         const value = e.target.value
@@ -99,8 +116,48 @@ const TicketPage = () => {
                                     value={formData.category}
                                 />
                                 <label htmlFor="range">Progress</label>
+
+                                <label>Status</label>
+                                <select
+                                    name="status"
+                                    value={formData.status}
+                                    onChange={handleChange}
+                                >
+                                    <option selected={formData.status === 'to be done'} value='to be done'>To be done</option>
+                                    <option selected={formData.status === 'working on it'} value='working on it'>Working on it</option>
+                                    <option selected={formData.status === 'done'} value='done'>Done</option>
+                                    <option selected={formData.status === 'stuck'} value='stuck'>Stuck</option>
+                                </select>
                             </>
                         }
+
+                        <input type="submit"/>
+                    </section>
+
+                    <section>
+                        <label htmlFor="owner">Owner</label>
+                        <input
+                            id="owner"
+                            name="owner"
+                            type="text"
+                            onChange={handleChange}
+                            required={true}
+                            value={formData.owner}
+                        />
+
+                        <label htmlFor="avatar">Avatar</label>
+                        <input
+                            id="avatar"
+                            name="avatar"
+                            type="url"
+                            onChange={handleChange}
+                            value={formData.avatar}
+                        />
+                        <div className="ticket__image-preview">
+                            {formData.avatar && (
+                                <img src={formData.avatar} alt="Img preview" />
+                            )}
+                        </div>
                     </section>
                 </form>
             </div>

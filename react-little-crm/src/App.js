@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Dashboard from './pages/Dashboard';
-import TicketPage from './pages/TicketPage';
-import Navbar from './components/Navbar';
+import Dashboard from './pages/Dashboard.js';
+import TicketPage from './pages/TicketPage.js';
+import Navbar from './components/Navbar.js';
 
 const App = () => {
   return (
