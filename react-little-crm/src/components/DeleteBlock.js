@@ -1,10 +1,15 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faX } from '@fortawesome/free-solid-svg-icons'
+import axios from 'axios'
 
-const DeleteBlock = () => {
+const DeleteBlock = ({ documentID }) => {
     
-    const delTicket = () => {
-        alert('Delete')
+    const delTicket = async () => {
+        const response = await axios.delete(`http://127.0.0.1:8800/tickets/${documentID}`)
+        
+        if (response.status === 200){
+            window.location.reload();
+        }
     }
 
     return (

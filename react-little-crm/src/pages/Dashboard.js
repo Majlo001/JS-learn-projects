@@ -1,46 +1,34 @@
+import {useState, useEffect, useContext} from 'react';
 import TicketCard from '../components/TicketCard.js';
+import axios from 'axios';
+import CategoriesContext from '../context.js';
 
 const Dashboard = () => {
+    const [tickets, setTickets] = useState(null)
+    const {categories, setCategories} = useContext(CategoriesContext)
 
-    const tickets = [
-        {
-            category: 'Q1 2023',
-            color: 'red',
-            title: 'NFT will break the world.',
-            avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZl_8G0K5ilgQOa3o7b2Ear7UdM1LwlgkDvw&usqp=CAU',
-            status: 'done',
-            priority: 5,
-            progress: 40,
-            description: 'Description here.',
-            timestamp: '2023-01-23T09:30:00+0000'
-        },
-        {
-            category: 'Q3 2023',
-            color: 'blue',
-            title: 'NFT Blue',
-            avatar: '',
-            status: 'to be done',
-            priority: 2,
-            progress: 55,
-            description: 'Description here.',
-            timestamp: '2023-08-23T09:30:00+0000'
-        },
-        {
-            category: 'Q1 2023',
-            color: 'green',
-            title: 'NFT Green',
-            avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQiof_lqI87o1dB6wFsyoJirSiS3ZAwv61GA&usqp=CAU',
-            status: 'stuck',
-            priority: 1,
-            progress: 15,
-            description: 'Description here.',
-            timestamp: '2023-01-23T09:30:00+0000'
-        },
-    ]
+    useEffect(() => {
+        async function fetchAPI() {
+            const response = await axios.get('http://127.0.0.1:8800/tickets')
 
-    const uniqueCategories = [
-        ...new Set(tickets?.map(({category}) => category))
-    ]
+            const dataObject = response.data.data
+
+            const keyArray = Object.keys(dataObject)
+            const dataArray = Object.keys(dataObject).map((key) => dataObject[key])
+            const formattedArray = []
+            keyArray.forEach((key, index) => {
+                const formattedData = { ...dataArray[index]}
+                formattedData['documentID'] = key
+                formattedArray.push(formattedData)
+            })
+            setTickets(formattedArray)
+        }
+        fetchAPI()
+    }, [])
+
+    useEffect(() => {
+        setCategories([...new Set(tickets?.map(({category}) => category))])
+    }, [tickets])
 
     const colorCategories = [
         '#93c47d',
@@ -50,6 +38,8 @@ const Dashboard = () => {
         '#e06666',
         '#6fa8dc'
     ]
+
+    const uniqueCategories = [...new Set(tickets?.map(({category}) => category))]
 
     return (
         <div className="dashboard">

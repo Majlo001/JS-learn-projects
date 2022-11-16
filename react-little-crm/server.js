@@ -13,6 +13,8 @@ app.use(express.json())
 const url = process.env.URL
 const token = process.env.ASTRA_TOKEN
 
+
+
 app.get('/tickets', async (req, res) => {
     const options = {
       method: 'GET',
@@ -28,7 +30,31 @@ app.get('/tickets', async (req, res) => {
       console.log(err)
       res.status(500).json({ message: err })
     }
-  })
+})
+app.get('/tickets/:documentID', async (req, res) => {
+  const id = req.params.documentID
+
+  const options = {
+      method: 'GET',
+      headers: {
+          Accepts: 'application/json',
+          'X-Cassandra-Token': token,
+          'Content-type': 'application/json'
+      }
+  }
+
+  try {
+      const response = await axios(`${url}/${id}`, options)
+      res.status(200).json(response.data)
+  } catch (err) {
+      console.log(err)
+      res.status(500).json({message: err})
+  }
+})
+
+app.listen(PORT, () => {
+    console.log('Server running on port ' + PORT);
+})
 
 app.post('/tickets', async (req, res) => {
     const formData = req.body.formData
@@ -52,6 +78,49 @@ app.post('/tickets', async (req, res) => {
     }
 })
 
+app.delete('/tickets/:documentID', async (req, res) => {
+  const id = req.params.documentID
+
+  const options = {
+      method: 'DELETE',
+      headers: {
+          Accepts: 'application/json',
+          'X-Cassandra-Token': token,
+          'Content-type': 'application/json'
+      }
+  }
+
+  try {
+      const response = await axios(`${url}/${id}`, options)
+      res.status(200).json(response.data)
+  } catch (err) {
+      console.log(err)
+      res.status(500).json({message: err})
+  }
+})
+
+// app.put('/tickets/:documentID', async (req, res) => {
+//   const id = req.params.documentID
+//   const data = req.body.data
+
+//   const options = {
+//       method: 'PUT',
+//       headers: {
+//           Accepts: 'application/json',
+//           'X-Cassandra-Token': token,
+//           'Content-type': 'application/json'
+//       },
+//       data
+//   }
+
+//   try {
+//       const response = await axios(`${url}/${id}`, options)
+//       res.status(200).json(response.data)
+//   } catch (err) {
+//       console.log(err)
+//       res.status(500).json({message: err})
+//   }
+// })
 
 app.listen(PORT, () => {
     console.log('Server running on port ' + PORT);

@@ -1,10 +1,10 @@
 import axios from 'axios';
-import {useState} from 'react';
-import {useNavigate} from 'react-router-dom';
+import {useState, useContext} from 'react';
+import {useNavigate, useParams} from 'react-router-dom';
+import CategoriesContext from '../context.js';
 
 
-const TicketPage = () => {
-    const editMode = false;
+const TicketPage = ({editMode}) => {
     const navigate = useNavigate()
     const [formData, setFormData] = useState({
         status: 'to be done',
@@ -14,7 +14,12 @@ const TicketPage = () => {
         timestamp: new Date().toISOString(),
     })
 
-    const uniqueCategories = ['test1','test2','test3']
+    const {categories, setCategories} = useContext(CategoriesContext)
+    let {id} = useParams()
+
+    const fetchData = async () => {
+        await axios.put(`http://127.0.0.1:8800/tickets/${id}`)
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -70,9 +75,9 @@ const TicketPage = () => {
                         <select
                             name="category"
                             onChange={handleChange}
-                            value={formData.category}
+                            value={formData.category || categories[0]}
                             >
-                               {uniqueCategories?.map((category, _index) => (
+                               {categories?.map((category, _index) => (
                                     <option key={_index} value={category}>{category}</option>
                                ))} 
                             </select>
