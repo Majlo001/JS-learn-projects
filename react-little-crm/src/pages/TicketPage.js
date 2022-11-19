@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { useEffect } from 'react';
 import {useState, useContext} from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
 import CategoriesContext from '../context.js';
@@ -8,7 +9,6 @@ const TicketPage = ({editMode}) => {
     const navigate = useNavigate()
     const [formData, setFormData] = useState({
         status: 'to be done',
-        color: 'green',
         priority: 0,
         progress: 0,
         timestamp: new Date().toISOString(),
@@ -18,19 +18,31 @@ const TicketPage = ({editMode}) => {
     let {id} = useParams()
 
     const fetchData = async () => {
-        await axios.put(`http://127.0.0.1:8800/tickets/${id}`)
+        const response = await axios.get(`http://127.0.0.1:8800/tickets/${id}`)
+        setFormData(response.data.data)
     }
+
+    useEffect(() => {
+        if (editMode) fetchData()
+    }, [])
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log(formData)
 
-        if (!editMode) {
+        if (editMode) {
+            const response = await axios.put(`http://127.0.0.1:8800/tickets/${id}`, {
+                data: formData
+            })
+
+            const success = response.status === 200
+            if (success) {
+                navigate('/')
+            }
+        } else {
             const response = await axios.post('http://127.0.0.1:8800/tickets', {
                 formData
             })
 
-            console.log(response.status)
             const success = response.status === 200
             if (success) {
                 navigate('/')
@@ -48,7 +60,7 @@ const TicketPage = ({editMode}) => {
     }
 
     return (
-        <div className="ticket__container">
+        <div className="ticket__container" key={id}>
             <h1>{editMode ? 'Update your Ticket' : 'Create new Ticket'}</h1>
             <div className="ticket__wrapper">
                 <form onSubmit={handleSubmit}>
@@ -75,7 +87,7 @@ const TicketPage = ({editMode}) => {
                         <select
                             name="category"
                             onChange={handleChange}
-                            value={formData.category || categories[0]}
+                            value={formData.category || "New Category"}
                             >
                                {categories?.map((category, _index) => (
                                     <option key={_index} value={category}>{category}</option>
@@ -118,7 +130,7 @@ const TicketPage = ({editMode}) => {
                                     min="0"
                                     max="100"
                                     onChange={handleChange}
-                                    value={formData.category}
+                                    value={formData.progress}
                                 />
                                 <label htmlFor="range">Progress</label>
 

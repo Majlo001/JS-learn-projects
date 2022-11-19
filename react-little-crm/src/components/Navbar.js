@@ -15,7 +15,7 @@ const Navbar = () => {
                 {/* <img src={logo} alt="logo" /> */}
             </div>
             <div className="nav__controls-container">
-                <div className="nav__icon" onClick={() => navigate('/ticket')}><FontAwesomeIcon icon={faPlus} /></div>
+                <div className="nav__icon" onClick={() => navigate('/tickets')}><FontAwesomeIcon icon={faPlus} /></div>
                 <div className="nav__icon" onClick={() => navigate('/')}><FontAwesomeIcon icon={faBackward}/></div>
             </div>
         </nav>

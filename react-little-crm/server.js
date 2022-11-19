@@ -21,7 +21,8 @@ app.get('/tickets', async (req, res) => {
       headers: {
         Accept: 'application/json',
         'X-Cassandra-Token': token,
-      },
+        'Content-type': 'application/json'
+      }
     }
     try {
       const response = await axios(`${url}?page-size=20`, options)
@@ -52,9 +53,6 @@ app.get('/tickets/:documentID', async (req, res) => {
   }
 })
 
-app.listen(PORT, () => {
-    console.log('Server running on port ' + PORT);
-})
 
 app.post('/tickets', async (req, res) => {
     const formData = req.body.formData
@@ -78,6 +76,8 @@ app.post('/tickets', async (req, res) => {
     }
 })
 
+
+
 app.delete('/tickets/:documentID', async (req, res) => {
   const id = req.params.documentID
 
@@ -99,28 +99,34 @@ app.delete('/tickets/:documentID', async (req, res) => {
   }
 })
 
-// app.put('/tickets/:documentID', async (req, res) => {
-//   const id = req.params.documentID
-//   const data = req.body.data
+app.put('/tickets/:documentID', async (req, res) => {
+  const id = req.params.documentID
+  const data = req.body.data
 
-//   const options = {
-//       method: 'PUT',
-//       headers: {
-//           Accepts: 'application/json',
-//           'X-Cassandra-Token': token,
-//           'Content-type': 'application/json'
-//       },
-//       data
-//   }
+  const options = {
+      method: 'PUT',
+      headers: {
+          Accepts: 'application/json',
+          'X-Cassandra-Token': token,
+          'Content-type': 'application/json'
+      },
+      data
+  }
 
-//   try {
-//       const response = await axios(`${url}/${id}`, options)
-//       res.status(200).json(response.data)
-//   } catch (err) {
-//       console.log(err)
-//       res.status(500).json({message: err})
-//   }
-// })
+  try {
+      const response = await axios(`${url}/${id}`, options)
+      res.status(200).json(response.data)
+  } catch (err) {
+      console.log(err)
+      res.status(500).json({message: err})
+  }
+})
+
+
+
+
+
+
 
 app.listen(PORT, () => {
     console.log('Server running on port ' + PORT);
