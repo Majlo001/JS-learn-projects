@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Ubuntu+Condensed&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #0096FF;
+}
+
+.generator__wrapper{
+    background-color: #fff;
+    max-width: 400px;
+    border-radius: 8px;
+    padding: 16px 24px;
+    height: 220px;
+    transition: height 0.25s ease;
+}
+.generator__wrapper.active {
+    height: auto;
+}
+
+.generator__header h1{
+    font-size: 22px;
+    margin-bottom: 4px;
+    font-weight: 500;
+}
+.generator__header p{
+    font-size: 16px;
+    font-weight: 400;
+    color: #474747;
+}
+.generator__form{
+    margin: 20px 0 32px 0;
+}
+.generator__form{
+    display: flex;
+    flex-direction: column;
+}
+.generator__form input{
+    font-size: 16px;
+    padding: 0 16px;
+    border: 1px solid #999;
+    outline: none;
+    height: 56px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+.generator__form button{
+    font-size: 16px;
+    padding: 0 16px;
+    background-color:#0096FF;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    height: 56px;
+    border-radius: 8px;
+}
+.generator__qr-code{
+    display: flex;
+    padding: 32px 0;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ccc;
+    opacity: 0;
+    pointer-events: none;
+}
+.generator__wrapper.active .generator__qr-code{
+    opacity: 1;
+    pointer-events: auto;
+    transition: opacity 0.5s 0.05s ease;
+}
